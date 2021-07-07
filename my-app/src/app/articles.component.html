@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Results:</h2>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Published at</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let article of articles; let i = index">
+        <td (click)="openInNewTab($event)" id="{{article.url}}">{{article.publishedAt.replace('T',' ').slice(0, -1)}}</td>
+        <td (click)="openInNewTab($event)" id="{{article.url}}">{{article.title}}</td>
+        <td (click)="openInNewTab($event)" id="{{article.url}}">{{article.description}}</td>
+        <td (click)="openInNewTab($event)" id="{{article.url}}"><img src="{{article.image}}" alt="article image" (click)="openInNewTab($event)" id="{{article.url}}" width="200" height="200" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
