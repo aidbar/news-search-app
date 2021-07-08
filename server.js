@@ -1,25 +1,42 @@
 const express = require('express');
+var cors = require('cors');
+
 const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
 
-const users = [];
+const searchQueries = [];
+const articlesClicked = [];
 
 app.use(bodyParser.json());
-app.use(express.static(process.cwd()+"/my-app/dist/angular-nodejs-example/"));
+//app.use(express.static(process.cwd() + "/my-app/dist/news-search-app/"));
 
-app.get('/api/users', (req, res) => {
-  res.json(users);
+app.use(cors());
+
+app.get('/api/searchQueries', (req, res) => {
+  res.json(searchQueries);
 });
 
-app.post('/api/user', (req, res) => {
-  const user = req.body.user;
-  users.push(user);
-  res.json("user addedd");
+app.post('/api/searchQuery', (req, res) => {
+  const searchQuery = req.body.searchQuery;
+  searchQueries.push(searchQuery);
+  console.log(searchQueries);
+  res.json("search query added");
+});
+
+app.get('/api/articlesClicked', (req, res) => {
+  res.json(articlesClicked);
+});
+
+app.post('/api/articleClicked', (req, res) => {
+  const articleClicked = req.body.articleClicked;
+  articlesClicked.push(articleClicked);
+  console.log(articleClicked);
+  res.json("article clicked added");
 });
 
 app.get('/', (req,res) => {
-  res.sendFile(process.cwd()+"/my-app/dist/angular-nodejs-example/index.html")
+  res.sendFile(process.cwd()+"/my-app/dist/news-search-app/index.html")
 });
 
 app.listen(port, () => {

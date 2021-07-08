@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -12,17 +11,16 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$angular-nodejs-example-primary: mat-palette($mat-indigo);
-$angular-nodejs-example-accent: mat-palette($mat-pink, A200, A100, A400);
+$news-search-app-primary: mat-palette($mat-indigo);
+$news-search-app-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$angular-nodejs-example-warn: mat-palette($mat-red);
+$news-search-app-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$angular-nodejs-example-theme: mat-light-theme($angular-nodejs-example-primary, $angular-nodejs-example-accent, $angular-nodejs-example-warn);
+$news-search-app-theme: mat-light-theme($news-search-app-primary, $news-search-app-accent, $news-search-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($angular-nodejs-example-theme);
-
+@include angular-material-theme($news-search-app-theme);

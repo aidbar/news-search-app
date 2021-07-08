@@ -29,6 +29,8 @@ export class AppComponent implements OnDestroy {
   searchTerm: string = "";
   searchTermIsValid: boolean = true;
   reqURL: string = "";
+  noResults: boolean = false;
+  reqBodyForLog = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -36,6 +38,9 @@ export class AppComponent implements OnDestroy {
 
     console.log("userForm.valid is " + this.userForm.valid);
     console.log(this.userForm.controls);
+    this.searchTermIsValid = true;
+    this.noResults = false;
+    this.articles = [];
 
     
     if (this.userForm.controls.searchValidation.valid == false) {
@@ -59,7 +64,11 @@ export class AppComponent implements OnDestroy {
           console.log("*");
           console.log("articles.length is " + self.articles.length);
           console.log("*");
-          if (data.totalArticles <= 9) {
+
+          if (data.totalArticles == 0) {
+            self.noResults = true;
+          }
+          else if (data.totalArticles > 0 && data.totalArticles <= 9) {
             self.articles = data.articles;
           }
           else {
@@ -67,22 +76,18 @@ export class AppComponent implements OnDestroy {
           }
           console.log(self.articles);
         });
+
+      this.reqBodyForLog = { userId: 0, searchTerm: this.searchTerm };
+
+      this.appService.addSearchQuery(this.reqBodyForLog).pipe(takeUntil(this.destroy$)).subscribe(data => {
+        console.log('message from server::::', data);
+        //this.userCount = this.userCount + 1;
+        //console.log(this.userCount);
+        //this.userForm.reset();
+      });
+
     }  
-
-    
-    /*this.appService.addUser(this.userForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('message::::', data);
-      this.userCount = this.userCount + 1;
-      console.log(this.userCount);
-      this.userForm.reset();
-    });*/
   }
-
-  /*getAllUsers() {
-    this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((articles: any[]) => {
-        this.articles = articles;
-    });
-  }*/
 
   ngOnDestroy() {
     this.destroy$.next(true);

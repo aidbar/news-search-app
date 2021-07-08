@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AppService } from './app.service';
+//import { takeUntil } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-articles',
@@ -7,7 +11,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }//constructor() { }
+
+  reqBodyForLog = {};
 
   @Input() articles: any[];
 
@@ -18,7 +24,14 @@ export class ArticlesComponent implements OnInit {
     
     e.preventDefault();
     console.log(e);
-    window.open(e.srcElement.id, "_blank");
+
+    window.open(this.articles[e.srcElement.id].url, "_blank");
+
+    this.reqBodyForLog = { userId: 0, articleClicked: this.articles[e.srcElement.id] };
+
+    this.appService.addArticleClicked(this.reqBodyForLog).pipe().subscribe(data => {
+      console.log('message from server::::', data);
+    });
   }
 
 }

@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { DisplayBoardComponent } from './display-board.component';
 import { ArticlesComponent } from './articles.component';
 import { environment } from '../environments/environment';
 
@@ -24,7 +23,6 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     HeaderComponent,
-    DisplayBoardComponent,
     ArticlesComponent
   ],
   imports: [

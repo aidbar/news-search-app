@@ -8,14 +8,22 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  rootURL = '/api';
+  rootURL = 'http://localhost:3080/api';
 
-  getUsers() {
-    return this.http.get(this.rootURL + '/users');
+  getSearchQueries() {
+    return this.http.get(this.rootURL + '/searchQueries');
   }
 
-  addUser(user: any) {
-    return this.http.post(this.rootURL + '/user', {user});
+  addSearchQuery(searchQuery: any) {
+    return this.http.post(this.rootURL + '/searchQuery', {searchQuery});
+  }
+
+  getArticlesClicked() {
+    return this.http.get(this.rootURL + '/articlesClicked');
+  }
+
+  addArticleClicked(articleClicked: any) {
+    return this.http.post(this.rootURL + '/articleClicked', { articleClicked });
   }
 
 }
